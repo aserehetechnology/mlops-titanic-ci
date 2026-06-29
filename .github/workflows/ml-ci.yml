@@ -1,0 +1,43 @@
+name: ML Workflow CI
+
+on:
+  push:
+    paths:
+      - 'MLProject/**'
+  workflow_dispatch:
+
+jobs:
+  train-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.12.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.7'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mlflow==2.19.0 pandas scikit-learn
+
+      - name: Train model using MLflow Project
+        run: |
+          cd MLProject
+          mlflow run . -P dataset=namadataset_preprocessing/titanic_processed.csv
+
+      - name: Build Docker Image
+        run: |
+          # Assuming run was successful, find the latest run_id
+          # This is a simplified version; in reality, we'd query mlflow for the run ID
+          # or use fixed model path if local
+          LATEST_RUN=$(ls -td mlruns/0/* | head -1)
+          RUN_ID=$(basename $LATEST_RUN)
+          mlflow models build-docker -m "runs:/$RUN_ID/model" -n "docker.io/peterhilarity/titanic-model:latest"
+
+      # - name: Push Docker Image (commented out as it requires credentials)
+      #   run: |
+      #     echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      #     docker push docker.io/peterhilarity/titanic-model:latest

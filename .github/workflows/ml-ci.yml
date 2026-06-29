@@ -26,14 +26,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install mlflow==2.19.0 pandas scikit-learn
 
-      - name: Set MLflow Tracking URI
-        run: |
-          echo "Setting MLflow tracking URI to local"
-
       - name: Run mlflow project
         run: |
           cd MLProject
           mlflow run . -P dataset=namadataset_preprocessing/titanic_processed.csv
+
+      - name: Get latest MLflow run_id
+        id: get_run_id
+        run: |
+          cd MLProject
+          LATEST_RUN=$(ls -td mlruns/0/* | head -1)
+          RUN_ID=$(basename $LATEST_RUN)
+          echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
+
+      - name: Install Python dependencies
+        run: |
+          # Extra dependencies if needed before building docker model
+          pip install docker
 
       - name: Upload to GitHub
         uses: actions/upload-artifact@v3
@@ -44,8 +53,6 @@ jobs:
       - name: Build Docker Model
         run: |
           cd MLProject
-          LATEST_RUN=$(ls -td mlruns/0/* | head -1)
-          RUN_ID=$(basename $LATEST_RUN)
           mlflow models build-docker -m "runs:/$RUN_ID/model" -n "titanic-model:latest"
 
       - name: Log in to Docker Hub

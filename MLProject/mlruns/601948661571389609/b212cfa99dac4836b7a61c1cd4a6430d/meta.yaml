@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/aserehe/Hacking/dicoding/submission-msml/Workflow-CI_Peter_Hilarity/MLProject/mlruns/601948661571389609/b212cfa99dac4836b7a61c1cd4a6430d/artifacts
+end_time: 1782792505676
+entry_point_name: ''
+experiment_id: '601948661571389609'
+lifecycle_stage: active
+run_id: b212cfa99dac4836b7a61c1cd4a6430d
+run_name: zealous-hen-452
+run_uuid: b212cfa99dac4836b7a61c1cd4a6430d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1782792495638
+status: 3
+tags: []
+user_id: aserehe

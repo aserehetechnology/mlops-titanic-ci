@@ -1,0 +1,11 @@
+digest: 00c83d87
+name: dataset
+profile: '{"num_rows": 160, "num_elements": 1120}'
+schema: '{"mlflow_colspec": [{"type": "long", "name": "Pclass", "required": true},
+  {"type": "long", "name": "Sex", "required": true}, {"type": "long", "name": "Age",
+  "required": true}, {"type": "long", "name": "SibSp", "required": true}, {"type":
+  "long", "name": "Parch", "required": true}, {"type": "double", "name": "Fare", "required":
+  true}, {"type": "long", "name": "Embarked", "required": true}]}'
+source: '{"tags": {"mlflow.user": "aserehe", "mlflow.source.name": "modelling.py",
+  "mlflow.source.type": "LOCAL", "mlflow.source.git.commit": "8bc596ef5902769ab2822c269902d67d7f2ee646"}}'
+source_type: code

@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/aserehe/Hacking/dicoding/submission-msml/Workflow-CI_Peter_Hilarity/MLProject/mlruns/601948661571389609/0b571086de134a4687358a452457d0b5/artifacts
+end_time: 1782737252999
+entry_point_name: ''
+experiment_id: '601948661571389609'
+lifecycle_stage: active
+run_id: 0b571086de134a4687358a452457d0b5
+run_name: hilarious-snail-193
+run_uuid: 0b571086de134a4687358a452457d0b5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1782737240964
+status: 3
+tags: []
+user_id: aserehe

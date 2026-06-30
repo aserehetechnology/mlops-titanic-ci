@@ -55,6 +55,8 @@ jobs:
         run: |
           cd MLProject
           EXP_ID=$(find mlruns -mindepth 2 -maxdepth 2 -type d -name '[a-f0-9]*' | head -1 | awk -F/ '{print $2}')
+          SITE_PACKAGES=$(python -c "import site; print(site.getsitepackages()[0])")
+          sed -i 's|https://bootstrap.pypa.io/get-pip.py|https://bootstrap.pypa.io/pip/3.9/get-pip.py|g' $SITE_PACKAGES/mlflow/models/docker_utils.py
           mlflow models build-docker -m "mlruns/$EXP_ID/$RUN_ID/artifacts/model" -n titanic-model:latest
 
       - name: Log in to Docker Hub
